@@ -9,11 +9,11 @@ namespace Matrix
       int size = matrix.MatrixSize;
       int[,] transposed = new int[size, size];
 
-      for (int row = 0; row < size; row++)
+      for (int row = 0; row < size; ++row)
       {
-        for (int col = 0; col < size; col++)
+        for (int column = 0; column < size; ++column)
         {
-          transposed[col, row] = matrix.MatrixElements[row, col];
+          transposed[column, row] = matrix.MatrixElements[row, column];
         }
       }
 
@@ -23,10 +23,11 @@ namespace Matrix
     public static int Trace(this SquareMatrix matrix)
     {
       int trace = 0;
-      for (int i = 0; i < matrix.MatrixSize; i++)
+      for (int elementIndex = 0; elementIndex < matrix.MatrixSize; ++elementIndex)
       {
-        trace += matrix.MatrixElements[i, i];
+        trace += matrix.MatrixElements[elementIndex, elementIndex];
       }
+      
       return trace;
     }
 
@@ -37,11 +38,11 @@ namespace Matrix
       int size = matrix.MatrixSize;
       int[,] diagonal = new int[size, size];
 
-      for (int row = 0; row < size; row++)
+      for (int row = 0; row < size; ++row)
       {
-        for (int col = 0; col < size; col++)
+        for (int column = 0; column < size; ++column)
         {
-          diagonal[row, col] = (row == col) ? matrix.MatrixElements[row, col] : 0;
+          diagonal[row, column] = (row == column) ? matrix.MatrixElements[row, column] : 0;
         }
       }
 
