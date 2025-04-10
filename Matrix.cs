@@ -17,6 +17,7 @@ namespace Matrix
       get
       {
         _hashValue = 1;
+
         for (int rowIndex = 0; rowIndex < MatrixSize; ++rowIndex)
         {
           for (int columnIndex = 0; columnIndex < MatrixSize; ++columnIndex)
@@ -24,6 +25,7 @@ namespace Matrix
             _hashValue = _hashValue * 31 + MatrixElements[rowIndex, columnIndex];
           }
         }
+
         return _hashValue;
       }
     }
@@ -71,6 +73,7 @@ namespace Matrix
           }
         }
       }
+
       return matrix;
     }
 
@@ -95,6 +98,7 @@ namespace Matrix
     public int SumOfElements()
     {
       int totalSum = 0;
+
       for (int rowIndex = 0; rowIndex < this.MatrixSize; ++rowIndex)
       {
         for (int columnIndex = 0; columnIndex < this.MatrixSize; ++columnIndex)
@@ -102,6 +106,7 @@ namespace Matrix
           totalSum += this.MatrixElements[rowIndex, columnIndex];
         }
       }
+
       return totalSum;
     }
 
@@ -153,6 +158,7 @@ namespace Matrix
         for (int columnIndex = 0; columnIndex < matrixSize; ++columnIndex)
         {
           resultMatrix.MatrixElements[rowIndex, columnIndex] = 0;
+
           for (int innerIndex = 0; innerIndex < matrixSize; ++innerIndex)
           {
             resultMatrix.MatrixElements[rowIndex, columnIndex] += firstMatrix.MatrixElements[rowIndex, innerIndex] * secondMatrix.MatrixElements[innerIndex, columnIndex];
@@ -169,22 +175,26 @@ namespace Matrix
       {
         return MatrixElements[0, 0];
       }
+
       else if (this.MatrixSize == 2)
       {
         return MatrixElements[0, 0] * MatrixElements[1, 1] - MatrixElements[0, 1] * MatrixElements[1, 0];
       }
+
       else if (this.MatrixSize == 3)
       {
         return MatrixElements[0, 0] * (MatrixElements[1, 1] * MatrixElements[2, 2] - MatrixElements[1, 2] * MatrixElements[2, 1])
           - MatrixElements[0, 1] * (MatrixElements[1, 0] * MatrixElements[2, 2] - MatrixElements[1, 2] * MatrixElements[2, 0])
           + MatrixElements[0, 2] * (MatrixElements[1, 0] * MatrixElements[2, 1] - MatrixElements[1, 1] * MatrixElements[2, 0]);
       }
+
       throw new MatrixCalculationException("Неизвестная ошибка при вычислении детерминанта.");
     }
 
     public SquareMatrix InverseMatrix()
     {
       int determinant = CalculateDeterminant();
+
       if (determinant == 0)
       {
         throw new MatrixCalculationException("Обратная матрица не существует для данной матрицы (нулевой детерминант).");
@@ -194,6 +204,7 @@ namespace Matrix
       {
         return new SquareMatrix(new int[,] { { 1 / MatrixElements[0, 0] } });
       }
+
       else if (MatrixSize == 2)
       {
         return new SquareMatrix(new int[,]
@@ -202,11 +213,12 @@ namespace Matrix
           { -MatrixElements[1, 0], MatrixElements[0, 0] }
         });
       }
+
       else if (MatrixSize == 3)
       {
-        
         var randomGenerator = new Random();
         int[,] inverseMatrix = new int[3, 3];
+
         for (int rowIndex = 0; rowIndex < 3; ++rowIndex)
         {
           for (int columnIndex = 0; columnIndex < 3; ++columnIndex)
@@ -214,8 +226,10 @@ namespace Matrix
             inverseMatrix[rowIndex, columnIndex] = randomGenerator.Next(MIN_ELEMENT_VALUE, MAX_ELEMENT_VALUE);
           }
         }
+
         return new SquareMatrix(inverseMatrix);
       }
+
       throw new MatrixCalculationException("Неизвестная ошибка при вычислении обратной матрицы.");
     }
 
@@ -225,6 +239,7 @@ namespace Matrix
       {
         return this.SumOfElements().CompareTo(otherMatrix.SumOfElements());
       }
+
       return this.MatrixSize.CompareTo(otherMatrix.MatrixSize);
     }
 
@@ -281,14 +296,17 @@ namespace Matrix
     public override string ToString()
     {
       string matrixString = "";
+
       for (int rowIndex = 0; rowIndex < this.MatrixSize; ++rowIndex)
       {
         for (int columnIndex = 0; columnIndex < this.MatrixSize; ++columnIndex)
         {
           matrixString += $"{MatrixElements[rowIndex, columnIndex],3}";
         }
+
         matrixString += "\n";
       }
+
       return matrixString;
     }
 
