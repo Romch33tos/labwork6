@@ -79,8 +79,8 @@ namespace Matrix
         Console.WriteLine("9. Сравнить матрицы");
         Console.WriteLine("10. Демонстрация приведения типов");
         Console.WriteLine("0. Выход");
-
         Console.Write("Ваш выбор: ");
+        
         if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 0 || choice > 10)
         {
           Console.WriteLine("Некорректный ввод. Попробуйте снова.");
@@ -108,12 +108,14 @@ namespace Matrix
       Console.WriteLine("1. Вручную");
       Console.WriteLine("2. Автозаполнение");
       Console.Write("Ваш выбор: ");
+      
       if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 1 || choice > 2)
       {
         throw new ArgumentException("Некорректный выбор способа создания матрицы.");
       }
 
       Console.Write("Введите размер матрицы (1-3): ");
+      
       if (!int.TryParse(Console.ReadLine(), out int size) || size < 1 || size > 3)
       {
         throw new ArgumentException("Некорректный размер матрицы.");
@@ -123,6 +125,7 @@ namespace Matrix
       {
         Console.WriteLine("Введите элементы матрицы через пробел:");
         string[] elements = Console.ReadLine().Split(' ');
+        
         if (elements.Length != size * size)
         {
           throw new ArgumentException("Ошибка при вводe.");
